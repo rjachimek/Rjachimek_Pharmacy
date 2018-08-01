@@ -8,8 +8,8 @@ namespace Rjachimek_Pharmacy.Models
     public class Order : ActiveRecord
     {
         public int ID { get; private set; }
-        public int MedicinID { get; private set; }
-        public int PrescriptionID { get; private set; }
+        public int MedicinID { get; set; }
+        public int PrescriptionID { get; set; }
         public DateTime Date { get; set; }
         public int Amount { get; set; }
 
