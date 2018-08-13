@@ -12,7 +12,7 @@ namespace Rjachimek_Pharmacy.Models
         public int PrescriptionID { get; set; }
         public DateTime Date { get; set; }
         public int Amount { get; set; }
-
+		
 		public Order(int medicinId, int prescriptionId, DateTime date, int amount)
 		{
 			MedicinID = medicinId;
@@ -285,8 +285,8 @@ namespace Rjachimek_Pharmacy.Models
 						connection.Open();
 						var sqlCommand = new SqlCommand();
 						sqlCommand.Connection = connection;
-						sqlCommand.CommandText = @"INSERT INTO Orders (Date, Amount)
-			                             VALUES (@Date, @Amount)";
+						sqlCommand.CommandText = @"INSERT INTO Orders (Orders.MedicinID, Orders.PrescriptionID, Date, Amount)
+													VALUES ( (select ID from Medicines where ID = @medicinId), (select ID from Prescriptions where ID = @prescriptionId), @date, @amount)";
 
 
 
@@ -385,8 +385,7 @@ namespace Rjachimek_Pharmacy.Models
 						Console.WriteLine("ID recepty: " + sqlDataReader["PrescriptionID"]);
 						Console.WriteLine("Data: " + sqlDataReader["Date"]);
 						Console.WriteLine("Ilość: " + sqlDataReader["Amount"]);
-
-
+						
 
 
 						Console.WriteLine();
